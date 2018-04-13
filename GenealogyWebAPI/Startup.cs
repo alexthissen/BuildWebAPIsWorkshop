@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,15 @@ namespace GenealogyWebAPI
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
+                if (appAssembly != null)
+                {
+                    builder.AddUserSecrets(appAssembly, optional: true);
+                }
+            }
 
             Configuration = builder.Build();
         }
