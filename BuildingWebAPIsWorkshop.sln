@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyWebAPI", "GenealogyWebAPI\GenealogyWebAPI.csproj", "{F3FA8415-803E-48D2-82B0-5CE7F54A2442}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{F3A33C95-9387-4D71-AB9E-18521C94830F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.HealthChecks", "Extensions\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj", "{847945AB-F659-4985-998A-86AF7BAD490D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Extensions.HealthChecks", "Extensions\Microsoft.Extensions.HealthChecks\Microsoft.Extensions.HealthChecks.csproj", "{BC72527D-5E98-446F-9522-8E9A33E7D371}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,21 @@ Global
 		{F3FA8415-803E-48D2-82B0-5CE7F54A2442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3FA8415-803E-48D2-82B0-5CE7F54A2442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3FA8415-803E-48D2-82B0-5CE7F54A2442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{847945AB-F659-4985-998A-86AF7BAD490D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{847945AB-F659-4985-998A-86AF7BAD490D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{847945AB-F659-4985-998A-86AF7BAD490D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{847945AB-F659-4985-998A-86AF7BAD490D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC72527D-5E98-446F-9522-8E9A33E7D371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC72527D-5E98-446F-9522-8E9A33E7D371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC72527D-5E98-446F-9522-8E9A33E7D371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC72527D-5E98-446F-9522-8E9A33E7D371}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{847945AB-F659-4985-998A-86AF7BAD490D} = {F3A33C95-9387-4D71-AB9E-18521C94830F}
+		{BC72527D-5E98-446F-9522-8E9A33E7D371} = {F3A33C95-9387-4D71-AB9E-18521C94830F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F43B3905-DA84-4B0B-8760-B49A226CBDA9}
