@@ -23,12 +23,12 @@ namespace GenealogyWebAPI.Controllers
 
         // GET api/familyname/name
         /// <summary>
-        /// Retrieve a list of online game servers.
+        /// Retrieve profile of person based on name.
         /// </summary>
-        /// <param name="limit">Maximum number of servers to retrieve.</param>
-        /// <returns>List of online game servers.</returns>
-        /// <response code="200">The list was successfully retrieved.</response>
-        /// <response code="400">The request parameters were invalid or a timeout while retrieving list occurred.</response>
+        /// <param name="name">Name of person.</param>
+        /// <returns>Detailed information regarding profile.</returns>
+        /// <response code="200">The profile was successfully retrieved.</response>
+        /// <response code="400">The request parameters were invalid or a timeout while retrieving profile occurred.</response>
         [HttpGet("{name}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(400)]

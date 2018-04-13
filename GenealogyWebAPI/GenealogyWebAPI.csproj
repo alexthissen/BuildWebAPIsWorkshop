@@ -5,6 +5,11 @@
     <UserSecretsId>87c32959-3721-4d6b-8a72-9896f48fd46b</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.1\GenealogyWebAPI.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;CS1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
