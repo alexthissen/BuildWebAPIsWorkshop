@@ -7,6 +7,9 @@ using GenealogyWebAPI.Proxies;
 using Refit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Net.Http;
+using Polly.Timeout;
+using Microsoft.AspNetCore.Http;
 
 namespace GenealogyWebAPI.Controllers
 {
@@ -45,9 +48,18 @@ namespace GenealogyWebAPI.Controllers
 
                 result = await genderizeClient.GetGenderForName(name, key);
             }
-            catch (Exception ex)
+            catch (HttpRequestException)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status502BadGateway, "Failed request to external resource.");
+            }
+            catch (TimeoutRejectedException)
+            {
+                return StatusCode(StatusCodes.Status504GatewayTimeout, "Timeout on external web request.");
+            }
+            catch (Exception)
+            {
+                // Exception shielding for all other exceptions
+                return StatusCode(StatusCodes.Status500InternalServerError, "Request could not be processed.");
             }
             return Ok(result);
         }
