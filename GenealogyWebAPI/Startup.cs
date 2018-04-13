@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -51,10 +53,28 @@ namespace GenealogyWebAPI
 
             // Options for particular external services
             services.Configure<GenderizeApiOptions>(Configuration.GetSection("GenderizeApiOptions"));
+
+            ConfigureHealth(services);
+        }
+
+        private void ConfigureHealth(IServiceCollection services)
+        {
+            services.AddHealthChecks(checks =>
+            {
+                checks
+                    .AddUrlCheck(Configuration["GenderizeApiOptions:BaseUrl"],
+                        response =>
+                        {
+                            // Custom check for healthy service
+                            var status = response.StatusCode == HttpStatusCode.UnprocessableEntity ? CheckStatus.Healthy : CheckStatus.Unhealthy;
+                            return new ValueTask<IHealthCheckResult>(HealthCheckResult.FromStatus(status, "Genderize API base URL reachable."));
+                        }
+                    );
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+            public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {

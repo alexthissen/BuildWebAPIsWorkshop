@@ -27,6 +27,7 @@ namespace GenealogyWebAPI
                 })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
+                .UseHealthChecks("/health", TimeSpan.FromSeconds(3)) // Or to host on a separate port: .UseHealthChecks(port)
                 .UseDefaultServiceProvider((context, options) =>
                 {
                     options.ValidateScopes = context.HostingEnvironment.IsDevelopment();

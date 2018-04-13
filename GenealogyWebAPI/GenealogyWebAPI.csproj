@@ -15,4 +15,8 @@
     <PackageReference Include="Refit" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Extensions\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj" />
+  </ItemGroup>
+
 </Project>
