@@ -95,16 +95,8 @@ namespace GenealogyWebAPI
                     settings.ShowRequestHeaders = true;
                     settings.DocExpansion = "list";
                     settings.UseJsonEditor = true;
-                    settings.PostProcess = document =>
-                    {
-                        document.BasePath = "/";
-                    };
                     settings.GeneratorSettings.Description = "Building Web APIs Workshop Demo Web API";
                     settings.GeneratorSettings.Title = "Genealogy Web API";
-                    settings.GeneratorSettings.Version = "1.0";
-                    settings.GeneratorSettings.OperationProcessors.Add(
-                        new ApiVersionProcessor() { IncludedVersions = { "1.0" } }
-                    );
                 });
             }
             else
@@ -113,7 +105,7 @@ namespace GenealogyWebAPI
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
