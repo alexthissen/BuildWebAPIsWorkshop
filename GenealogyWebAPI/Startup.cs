@@ -19,12 +19,15 @@ using Microsoft.Extensions.Options;
 using NSwag.AspNetCore;
 using NSwag.SwaggerGeneration.Processors;
 using Polly;
+using Polly.Registry;
 using Refit;
 
 namespace GenealogyWebAPI
 {
     public class Startup
     {
+        private IPolicyRegistry<string> policyRegistry;
+
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -62,10 +65,18 @@ namespace GenealogyWebAPI
             // Options for particular external services
             services.Configure<GenderizeApiOptions>(Configuration.GetSection("GenderizeApiOptions"));
 
+            ConfigurePolicies(services);
             ConfigureHealth(services);
             ConfigureOpenApi(services);
             ConfigureApiOptions(services);
             ConfigureHttpClients(services);
+        }
+
+        private void ConfigurePolicies(IServiceCollection services)
+        {
+            policyRegistry = services.AddPolicyRegistry();
+            var timeoutPolicy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500));
+            policyRegistry.Add("timeout", timeoutPolicy);
         }
 
         private void ConfigureHttpClients(IServiceCollection services)
@@ -76,7 +87,7 @@ namespace GenealogyWebAPI
                 options.Timeout = TimeSpan.FromMilliseconds(15000);
                 options.DefaultRequestHeaders.Add("ClientFactory", "Check");
             })
-            .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500)))
+            .AddPolicyHandlerFromRegistry("timeout")
             .AddTransientHttpErrorPolicy(p => p.RetryAsync(3))
             .AddTypedClient(client => RestService.For<IGenderizeClient>(client));
         }
