@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview2-final" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.1.0-preview2-final" />
+    <PackageReference Include="NSwag.AspNetCore" Version="11.17.0" />
     <PackageReference Include="Refit" Version="4.3.0" />
   </ItemGroup>
 

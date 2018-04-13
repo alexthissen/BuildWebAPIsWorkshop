@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NSwag.AspNetCore;
+using NSwag.SwaggerGeneration.Processors;
 
 namespace GenealogyWebAPI
 {
@@ -55,6 +57,12 @@ namespace GenealogyWebAPI
             services.Configure<GenderizeApiOptions>(Configuration.GetSection("GenderizeApiOptions"));
 
             ConfigureHealth(services);
+            ConfigureOpenApi(services);
+        }
+
+        private void ConfigureOpenApi(IServiceCollection services)
+        {
+            services.AddSwagger();
         }
 
         private void ConfigureHealth(IServiceCollection services)
@@ -74,11 +82,30 @@ namespace GenealogyWebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                // Do not expose Swagger interface in production
+                app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
+                {
+                    settings.SwaggerRoute = "/swagger/v1/swagger.json";
+                    settings.ShowRequestHeaders = true;
+                    settings.DocExpansion = "list";
+                    settings.UseJsonEditor = true;
+                    settings.PostProcess = document =>
+                    {
+                        document.BasePath = "/";
+                    };
+                    settings.GeneratorSettings.Description = "Building Web APIs Workshop Demo Web API";
+                    settings.GeneratorSettings.Title = "Genealogy Web API";
+                    settings.GeneratorSettings.Version = "1.0";
+                    settings.GeneratorSettings.OperationProcessors.Add(
+                        new ApiVersionProcessor() { IncludedVersions = { "1.0" } }
+                    );
+                });
             }
             else
             {
