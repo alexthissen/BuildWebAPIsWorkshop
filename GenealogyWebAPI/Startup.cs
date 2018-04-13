@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using GenealogyWebAPI.Proxies;
@@ -17,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSwag.AspNetCore;
 using NSwag.SwaggerGeneration.Processors;
+using Polly;
 using Refit;
 
 namespace GenealogyWebAPI
@@ -74,6 +76,8 @@ namespace GenealogyWebAPI
                 options.Timeout = TimeSpan.FromMilliseconds(15000);
                 options.DefaultRequestHeaders.Add("ClientFactory", "Check");
             })
+            .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500)))
+            .AddTransientHttpErrorPolicy(p => p.RetryAsync(3))
             .AddTypedClient(client => RestService.For<IGenderizeClient>(client));
         }
 
