@@ -34,6 +34,12 @@ namespace GenealogyWebAPI
             }
 
             Configuration = builder.Build();
+
+            if (env.IsProduction())
+            {
+                builder.AddAzureKeyVault(Configuration["KeyVaultName"]);
+                Configuration = builder.Build();
+            }
         }
 
         public IConfiguration Configuration { get; }
