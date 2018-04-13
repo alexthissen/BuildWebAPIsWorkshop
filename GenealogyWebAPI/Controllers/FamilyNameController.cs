@@ -25,10 +25,12 @@ namespace GenealogyWebAPI.Controllers
         public async Task<ActionResult<string>> Get(string name)
         {
             string result = null;
+            string key = Configuration["GenderizeDeveloperApiKey"];
+
             try
             {
                 string baseUrl = Configuration["GenderizeBaseUrl"];
-                result = await RestService.For<IGenderizeClient>(baseUrl).GetGenderForName(name);
+                result = await RestService.For<IGenderizeClient>(baseUrl).GetGenderForName(name, key);
             }
             catch (Exception ex)
             {

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GenealogyWebAPI.Proxies
 {
-    // https://api.genderize.io/?name=igor&country_id=ua
+    // https://api.genderize.io/?name=igor&country_id=ua&apikey=
     // https://genderize.io/
 
     [Headers("User-Agent: Genderize IO WebAPI Client 1.0")]
     public interface IGenderizeClient
     {
         [Get("/")]
-        Task<string> GetGenderForName(string name);
+        Task<string> GetGenderForName(string name, [AliasAs("apikey")] string key);
     }
 }
