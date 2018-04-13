@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
+using GenealogyWebAPI.Proxies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSwag.AspNetCore;
 using NSwag.SwaggerGeneration.Processors;
+using Refit;
 
 namespace GenealogyWebAPI
 {
