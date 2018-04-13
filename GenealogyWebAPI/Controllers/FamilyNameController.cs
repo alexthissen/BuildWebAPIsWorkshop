@@ -14,10 +14,12 @@ namespace GenealogyWebAPI.Controllers
     [ApiController]
     public class FamilyNameController : ControllerBase
     {
+        private readonly IGenderizeClient genderizeClient;
         private readonly IOptionsSnapshot<GenderizeApiOptions> genderizeOptions;
 
-        public FamilyNameController(IOptionsSnapshot<GenderizeApiOptions> genderizeOptions)
+        public FamilyNameController(IGenderizeClient genderizeClient, IOptionsSnapshot<GenderizeApiOptions> genderizeOptions)
         {
+            this.genderizeClient = genderizeClient;
             this.genderizeOptions = genderizeOptions;
         }
 
@@ -41,7 +43,7 @@ namespace GenealogyWebAPI.Controllers
                 string baseUrl = genderizeOptions.Value.BaseUrl;
                 string key = genderizeOptions.Value.DeveloperApiKey;
 
-                result = await RestService.For<IGenderizeClient>(baseUrl).GetGenderForName(name, key);
+                result = await genderizeClient.GetGenderForName(name, key);
             }
             catch (Exception ex)
             {

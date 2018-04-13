@@ -63,6 +63,18 @@ namespace GenealogyWebAPI
             ConfigureHealth(services);
             ConfigureOpenApi(services);
             ConfigureApiOptions(services);
+            ConfigureHttpClients(services);
+        }
+
+        private void ConfigureHttpClients(IServiceCollection services)
+        {
+            services.AddHttpClient("Genderize", options =>
+            {
+                options.BaseAddress = new Uri(Configuration["GenderizeApiOptions:BaseUrl"]);
+                options.Timeout = TimeSpan.FromMilliseconds(15000);
+                options.DefaultRequestHeaders.Add("ClientFactory", "Check");
+            })
+            .AddTypedClient(client => RestService.For<IGenderizeClient>(client));
         }
 
         private void ConfigureApiOptions(IServiceCollection services)
