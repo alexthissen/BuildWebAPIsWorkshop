@@ -26,6 +26,9 @@ namespace GenealogyWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Options for particular external services
+            services.Configure<GenderizeApiOptions>(Configuration.GetSection("GenderizeApiOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using GenealogyWebAPI.Proxies;
 using Refit;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace GenealogyWebAPI.Controllers
 {
@@ -13,11 +14,11 @@ namespace GenealogyWebAPI.Controllers
     [ApiController]
     public class FamilyNameController : ControllerBase
     {
-        private readonly IConfiguration Configuration;
+        private readonly IOptionsSnapshot<GenderizeApiOptions> genderizeOptions;
 
-        public FamilyNameController(IConfiguration configuration)
+        public FamilyNameController(IOptionsSnapshot<GenderizeApiOptions> genderizeOptions)
         {
-            this.Configuration = configuration;
+            this.genderizeOptions = genderizeOptions;
         }
 
         // GET api/familyname/name
@@ -25,11 +26,12 @@ namespace GenealogyWebAPI.Controllers
         public async Task<ActionResult<string>> Get(string name)
         {
             string result = null;
-            string key = Configuration["GenderizeDeveloperApiKey"];
 
             try
             {
-                string baseUrl = Configuration["GenderizeBaseUrl"];
+                string baseUrl = genderizeOptions.Value.BaseUrl;
+                string key = genderizeOptions.Value.DeveloperApiKey;
+
                 result = await RestService.For<IGenderizeClient>(baseUrl).GetGenderForName(name, key);
             }
             catch (Exception ex)
