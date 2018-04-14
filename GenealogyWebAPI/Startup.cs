@@ -74,6 +74,18 @@ namespace GenealogyWebAPI
             ConfigureHttpClients(services);
             ConfigureVersioning(services);
             ConfigureApplicationInsights(services);
+            ConfigureHSTS(services);
+        }
+
+        private void ConfigureHSTS(IServiceCollection services)
+        {
+            services.AddHsts(
+                options =>
+                {
+                    options.MaxAge = TimeSpan.FromDays(100);
+                    options.IncludeSubDomains = true;
+                    options.Preload = true;
+                });
         }
 
         private void ConfigureFeatures(IServiceCollection services)
