@@ -75,7 +75,8 @@ namespace GenealogyWebAPI
 
         private void ConfigureVersioning(IServiceCollection services)
         {
-            services.AddApiVersioning(options => {
+            services.AddApiVersioning(options =>
+            {
                 options.DefaultApiVersion = new ApiVersion(1, 0);
                 options.AssumeDefaultVersionWhenUnspecified = true;
                 // Includes headers "api-supported-versions" and "api-deprecated-versions"
@@ -167,9 +168,9 @@ namespace GenealogyWebAPI
             else
             {
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
         }
     }

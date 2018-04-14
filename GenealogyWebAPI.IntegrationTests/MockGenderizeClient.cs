@@ -9,9 +9,9 @@ namespace GenealogyWebAPI.IntegrationTests
 {
     internal class MockGenderizeClient: IGenderizeClient
     {
-        public Task<string> GetGenderForName(string name, [AliasAs("apikey")] string key)
+        public Task<string> GetGenderForName(string name, string key)
         {
-            return Task.FromResult<string>(@"{""name"":""alex"",""gender"":""male"",""probability"":0.87,""count"":5856}");
+            return Task.FromResult<string>("'alex'");
         }
     }
 }
