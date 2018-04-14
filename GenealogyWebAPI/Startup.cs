@@ -67,12 +67,12 @@ namespace GenealogyWebAPI
             services.Configure<GenderizeApiOptions>(Configuration.GetSection("GenderizeApiOptions"));
 
             ConfigurePolicies(services);
+            ConfigureFeatures(services);
             ConfigureHealth(services);
             ConfigureOpenApi(services);
             ConfigureApiOptions(services);
             ConfigureHttpClients(services);
             ConfigureVersioning(services);
-            ConfigureFeatures(services);
             ConfigureApplicationInsights(services);
         }
 
@@ -161,6 +161,20 @@ namespace GenealogyWebAPI
                             return new ValueTask<IHealthCheckResult>(HealthCheckResult.FromStatus(status, "Genderize API base URL reachable."));
                         }
                     );
+
+                // Use feature toggle to add this functionality
+                var feature = services.BuildServiceProvider().GetRequiredService<AdvancedHealthFeature>();
+                if (feature.FeatureEnabled)
+                {
+                    checks.AddHealthCheckGroup(
+                        "memory",
+                        group => group
+                            .AddPrivateMemorySizeCheck(200000000) // Maximum private memory
+                            .AddVirtualMemorySizeCheck(3000000000000)
+                            .AddWorkingSetCheck(200000000),
+                        CheckStatus.Unhealthy
+                    );
+                }
             });
         }
 
