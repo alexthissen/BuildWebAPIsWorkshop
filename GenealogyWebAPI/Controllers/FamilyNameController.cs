@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using GenealogyWebAPI.Proxies;
-using Refit;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System.Net.Http;
-using Polly.Timeout;
+﻿using GenealogyWebAPI.Proxies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Polly.Timeout;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace GenealogyWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("0.9", Deprecated = true)]
     public class FamilyNameController : ControllerBase
     {
         private readonly IGenderizeClient genderizeClient;

@@ -70,6 +70,17 @@ namespace GenealogyWebAPI
             ConfigureOpenApi(services);
             ConfigureApiOptions(services);
             ConfigureHttpClients(services);
+            ConfigureVersioning(services);
+        }
+
+        private void ConfigureVersioning(IServiceCollection services)
+        {
+            services.AddApiVersioning(options => {
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                // Includes headers "api-supported-versions" and "api-deprecated-versions"
+                options.ReportApiVersions = true;
+            });
         }
 
         private void ConfigurePolicies(IServiceCollection services)
