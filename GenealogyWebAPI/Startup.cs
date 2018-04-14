@@ -71,6 +71,16 @@ namespace GenealogyWebAPI
             ConfigureApiOptions(services);
             ConfigureHttpClients(services);
             ConfigureVersioning(services);
+            ConfigureApplicationInsights(services);
+        }
+
+        private void ConfigureApplicationInsights(IServiceCollection services)
+        {
+            IHostingEnvironment env = services.BuildServiceProvider().GetRequiredService<IHostingEnvironment>();
+            services.AddApplicationInsightsTelemetry(options => {
+                options.DeveloperMode = env.IsDevelopment();
+                options.InstrumentationKey = Configuration["ApplicationInsights:InstrumentationKey"];
+            });
         }
 
         private void ConfigureVersioning(IServiceCollection services)
