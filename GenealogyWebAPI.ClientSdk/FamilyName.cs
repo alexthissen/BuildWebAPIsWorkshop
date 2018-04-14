@@ -7,6 +7,7 @@
 namespace GenealogyWebAPI.ClientSdk
 {
     using Microsoft.Rest;
+    using Models;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -72,7 +73,7 @@ namespace GenealogyWebAPI.ClientSdk
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<string>> GetWithHttpMessagesAsync(string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<FamilyProfile>> GetWithHttpMessagesAsync(string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (name == null)
             {
@@ -91,7 +92,7 @@ namespace GenealogyWebAPI.ClientSdk
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v1.0/FamilyName/{name}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v2.0/FamilyName/{name}").ToString();
             _url = _url.Replace("{name}", System.Uri.EscapeDataString(name));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -152,7 +153,7 @@ namespace GenealogyWebAPI.ClientSdk
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<string>();
+            var _result = new HttpOperationResponse<FamilyProfile>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -161,7 +162,7 @@ namespace GenealogyWebAPI.ClientSdk
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<FamilyProfile>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

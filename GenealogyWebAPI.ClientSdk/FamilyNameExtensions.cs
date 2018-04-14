@@ -6,6 +6,7 @@
 
 namespace GenealogyWebAPI.ClientSdk
 {
+    using Models;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace GenealogyWebAPI.ClientSdk
             /// <param name='name'>
             /// Name of person.
             /// </param>
-            public static string Get(this IFamilyName operations, string name)
+            public static FamilyProfile Get(this IFamilyName operations, string name)
             {
                 return operations.GetAsync(name).GetAwaiter().GetResult();
             }
@@ -40,7 +41,7 @@ namespace GenealogyWebAPI.ClientSdk
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetAsync(this IFamilyName operations, string name, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<FamilyProfile> GetAsync(this IFamilyName operations, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
                 {

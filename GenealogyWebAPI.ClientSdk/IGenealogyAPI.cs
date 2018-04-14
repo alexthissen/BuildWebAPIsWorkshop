@@ -6,6 +6,7 @@
 
 namespace GenealogyWebAPI.ClientSdk
 {
+    using Models;
     using Newtonsoft.Json;
 
     /// <summary>

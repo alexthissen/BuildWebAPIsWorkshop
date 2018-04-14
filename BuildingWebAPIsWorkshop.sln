@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyWebAPI", "GenealogyWebAPI\GenealogyWebAPI.csproj", "{F3FA8415-803E-48D2-82B0-5CE7F54A2442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyWebAPI", "GenealogyWebAPI\GenealogyWebAPI.csproj", "{F3FA8415-803E-48D2-82B0-5CE7F54A2442}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{F3A33C95-9387-4D71-AB9E-18521C94830F}"
 EndProject
@@ -14,12 +14,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{85B85411-5948-4F58-AB38-2B7B58C1CF8A}"
 	ProjectSection(SolutionItems) = preProject
 		BuildWebAPIs.v1.json = BuildWebAPIs.v1.json
+		BuildWebAPIs.v2.json = BuildWebAPIs.v2.json
 		GenerateClientSdk.ps1 = GenerateClientSdk.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyWebAPI.ClientSdk", "GenealogyWebAPI.ClientSdk\GenealogyWebAPI.ClientSdk.csproj", "{7DD281B8-E70D-46A5-9488-16A76C3060F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyWebAPI.IntegrationTests", "GenealogyWebAPI.IntegrationTests\GenealogyWebAPI.IntegrationTests.csproj", "{14011625-2270-4BB5-934A-ECFB075DF450}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyWebAPI.IntegrationTests", "GenealogyWebAPI.IntegrationTests\GenealogyWebAPI.IntegrationTests.csproj", "{14011625-2270-4BB5-934A-ECFB075DF450}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -36,10 +36,10 @@ namespace GenealogyWebAPI.IntegrationTests
         }
 
         [TestMethod]
-        public async Task OpenApiDocumentationAvailable()
+        public async Task OpenApiDocumentationV2Available()
         {
             // Act
-            var response = await client.GetAsync("/swagger/index.html?url=/swagger/v1/swagger.json");
+            var response = await client.GetAsync("/swagger/index.html?url=/swagger/v2/swagger.json");
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -48,7 +48,7 @@ namespace GenealogyWebAPI.IntegrationTests
         }
 
         [TestMethod]
-        public async Task GetFamilyName()
+        public async Task GetFamilyNameV2()
         {
             // Arrange 
             string name = "alex";

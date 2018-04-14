@@ -4,7 +4,7 @@
   "info": {
     "title": "Genealogy API",
     "description": "Building Web APIs Workshop Demo Web API",
-    "version": "1.0"
+    "version": "2.0"
   },
   "host": "localhost:44383",
   "basePath": "/",
@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1.0/FamilyName/{name}": {
+    "/api/v2.0/FamilyName/{name}": {
       "get": {
         "tags": [
           "FamilyName"
@@ -40,7 +40,7 @@
             "x-nullable": true,
             "description": "Detailed information regarding profile.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/FamilyProfile"
             }
           },
           "400": {
