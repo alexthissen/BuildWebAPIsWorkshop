@@ -149,6 +149,7 @@ namespace GenealogyWebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Information);
             loggerFactory.AddEventSourceLogger(); // ETW on Windows, dev/null on other platforms
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
