@@ -2,6 +2,7 @@
 using GenealogyWebAPI.Proxies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Polly.Timeout;
 using System;
@@ -16,12 +17,17 @@ namespace GenealogyWebAPI.Controllers.V2
     public class FamilyNameController : ControllerBase
     {
         private readonly IGenderizeClient genderizeClient;
+        private readonly ILogger<FamilyNameController> logger;
         private readonly IOptionsSnapshot<GenderizeApiOptions> genderizeOptions;
 
-        public FamilyNameController(IGenderizeClient genderizeClient, IOptionsSnapshot<GenderizeApiOptions> genderizeOptions)
+        public FamilyNameController(
+            IGenderizeClient genderizeClient, 
+            IOptionsSnapshot<GenderizeApiOptions> genderizeOptions,
+            ILoggerFactory logger)
         {
             this.genderizeClient = genderizeClient;
             this.genderizeOptions = genderizeOptions;
+            this.logger = logger.CreateLogger<FamilyNameController>();
         }
 
         // GET api/familyname/name
@@ -45,6 +51,8 @@ namespace GenealogyWebAPI.Controllers.V2
                 string baseUrl = genderizeOptions.Value.BaseUrl;
                 string key = genderizeOptions.Value.DeveloperApiKey;
 
+                logger.LogInformation("Acquiring name details for {FamilyName}.", name);
+
                 result = await genderizeClient.GetGenderForName(name, key);
                 Gender gender;
                 profile = new FamilyProfile() {
@@ -53,16 +61,20 @@ namespace GenealogyWebAPI.Controllers.V2
                         ? gender : Gender.Unknown
                 };
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
+                logger.LogWarning(ex, "Http request failed.");
                 return StatusCode(StatusCodes.Status502BadGateway, "Failed request to external resource.");
             }
-            catch (TimeoutRejectedException)
+            catch (TimeoutRejectedException ex)
             {
+                logger.LogWarning(ex, "Timeout occurred when retrieving details for {FamilyName}.", name);
                 return StatusCode(StatusCodes.Status504GatewayTimeout, "Timeout on external web request.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logger.LogError(ex, "Unknown exception occurred while retrieving gender details.");
+
                 // Exception shielding for all other exceptions
                 return StatusCode(StatusCodes.Status500InternalServerError, "Request could not be processed.");
             }
