@@ -10,7 +10,7 @@ namespace GenealogyWebAPI.Proxies
     // https://api.genderize.io/?name=igor&country_id=ua&apikey=
     // https://genderize.io/
 
-    [Headers("User-Agent: Genderize IO WebAPI Client 1.0")]
+    [Headers("User-Agent: Genderize IO WebAPI Client 2.0")]
     public interface IGenderizeClient
     {
         [Get("/")]

@@ -1,4 +1,5 @@
 using GenealogyWebAPI.ClientSdk;
+using GenealogyWebAPI.Model;
 using GenealogyWebAPI.Proxies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -58,8 +59,8 @@ namespace GenealogyWebAPI.IntegrationTests
             // Assert
             Assert.IsNotNull(result, "Should have received a response.");
             Assert.AreEqual(HttpStatusCode.OK, result.Response.StatusCode, "Status code should be 200 OK");
-            string responseBody = await result.Response.Content.ReadAsStringAsync();
-            Assert.IsTrue(responseBody.Contains(name), "Response body should contain original name");
+            GenderizeResult response = await result.Response.Content.ReadAsAsync<GenderizeResult>();
+            Assert.AreEqual(name, response.Name, "Response body should contain original name");
         }
     }
 }

@@ -156,13 +156,38 @@ namespace GenealogyWebAPI
                 // Do not expose Swagger interface in production
                 app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
                 {
+                    settings.SwaggerRoute = "/swagger/v2/swagger.json";
+                    settings.ShowRequestHeaders = true;
+                    settings.DocExpansion = "list";
+                    settings.UseJsonEditor = true;
+                    settings.PostProcess = document =>
+                    {
+                        document.BasePath = "/";
+                    };
+                    settings.GeneratorSettings.Description = "Building Web APIs Workshop Demo Web API";
+                    settings.GeneratorSettings.Title = "Genealogy API";
+                    settings.GeneratorSettings.Version = "2.0";
+                    settings.GeneratorSettings.OperationProcessors.Add(
+                        new ApiVersionProcessor() { IncludedVersions = { "2.0" } }
+                    );
+                });
+
+                app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
+                {
                     settings.SwaggerRoute = "/swagger/v1/swagger.json";
                     settings.ShowRequestHeaders = true;
                     settings.DocExpansion = "list";
                     settings.UseJsonEditor = true;
+                    settings.PostProcess = document =>
+                    {
+                        document.BasePath = "/";
+                    };
                     settings.GeneratorSettings.Description = "Building Web APIs Workshop Demo Web API";
                     settings.GeneratorSettings.Title = "Genealogy API";
                     settings.GeneratorSettings.Version = "1.0";
+                    settings.GeneratorSettings.OperationProcessors.Add(
+                        new ApiVersionProcessor() { IncludedVersions = { "1.0" } }
+                    );
                 });
             }
             else
