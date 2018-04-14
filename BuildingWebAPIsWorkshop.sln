@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		BuildWebAPIs.v1.json = BuildWebAPIs.v1.json
 		BuildWebAPIs.v2.json = BuildWebAPIs.v2.json
 		GenerateClientSdk.ps1 = GenerateClientSdk.ps1
+		Readme.md = Readme.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyWebAPI.ClientSdk", "GenealogyWebAPI.ClientSdk\GenealogyWebAPI.ClientSdk.csproj", "{7DD281B8-E70D-46A5-9488-16A76C3060F5}"
