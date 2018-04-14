@@ -112,6 +112,14 @@ namespace GenealogyWebAPI
                 // Includes headers "api-supported-versions" and "api-deprecated-versions"
                 options.ReportApiVersions = true;
             });
+
+            // Alternative to attribute based versioning
+            //options.Conventions.Controller<GameServerController>()
+            //    .HasDeprecatedApiVersion(new ApiVersion(0, 9))
+            //    .HasApiVersion(1)
+            //    .AdvertisesApiVersion(2)
+            //    .Action(a => a.Get(default(int))).MapToApiVersion(1);
+
         }
 
         private void ConfigurePolicies(IServiceCollection services)
