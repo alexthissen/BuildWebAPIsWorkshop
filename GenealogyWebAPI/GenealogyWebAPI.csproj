@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>87c32959-3721-4d6b-8a72-9896f48fd46b</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/6d45a9d6-675e-4064-8356-08660968c19b/resourcegroups/BuildingWebAPIs/providers/microsoft.insights/components/BuildingWebAPIs</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/6d45a9d6-675e-4064-8356-08660968c19b/resourcegroups/BuildingWebAPIs/providers/microsoft.insights/components/BuildingWebAPIs</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview2-final" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.1.0-preview2-final" />
@@ -25,6 +28,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Extensions\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
