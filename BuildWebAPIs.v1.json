@@ -2,7 +2,7 @@
   "x-generator": "NSwag v11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v11.0.0.0))",
   "swagger": "2.0",
   "info": {
-    "title": "Genealogy Web API",
+    "title": "Genealogy API",
     "description": "Building Web APIs Workshop Demo Web API",
     "version": "1.0"
   },

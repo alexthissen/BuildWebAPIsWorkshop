@@ -17,7 +17,7 @@ namespace GenealogyWebAPI.ClientSdk
     /// <summary>
     /// Building Web APIs Workshop Demo Web API
     /// </summary>
-    public partial class GenealogyWebAPI : ServiceClient<GenealogyWebAPI>, IGenealogyWebAPI
+    public partial class GenealogyAPI : ServiceClient<GenealogyAPI>, IGenealogyAPI
     {
         /// <summary>
         /// The base URI of the service.
@@ -40,18 +40,18 @@ namespace GenealogyWebAPI.ClientSdk
         public virtual IFamilyName FamilyName { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the GenealogyWebAPI class.
+        /// Initializes a new instance of the GenealogyAPI class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public GenealogyWebAPI(params DelegatingHandler[] handlers) : base(handlers)
+        public GenealogyAPI(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the GenealogyWebAPI class.
+        /// Initializes a new instance of the GenealogyAPI class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -59,13 +59,13 @@ namespace GenealogyWebAPI.ClientSdk
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public GenealogyWebAPI(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public GenealogyAPI(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the GenealogyWebAPI class.
+        /// Initializes a new instance of the GenealogyAPI class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -76,7 +76,7 @@ namespace GenealogyWebAPI.ClientSdk
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public GenealogyWebAPI(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        public GenealogyAPI(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -86,7 +86,7 @@ namespace GenealogyWebAPI.ClientSdk
         }
 
         /// <summary>
-        /// Initializes a new instance of the GenealogyWebAPI class.
+        /// Initializes a new instance of the GenealogyAPI class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -100,7 +100,7 @@ namespace GenealogyWebAPI.ClientSdk
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public GenealogyWebAPI(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public GenealogyAPI(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {

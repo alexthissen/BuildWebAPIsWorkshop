@@ -20,7 +20,7 @@ namespace GenealogyWebAPI.ClientSdk
     /// <summary>
     /// FamilyName operations.
     /// </summary>
-    public partial class FamilyName : IServiceOperations<GenealogyWebAPI>, IFamilyName
+    public partial class FamilyName : IServiceOperations<GenealogyAPI>, IFamilyName
     {
         /// <summary>
         /// Initializes a new instance of the FamilyName class.
@@ -31,7 +31,7 @@ namespace GenealogyWebAPI.ClientSdk
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public FamilyName(GenealogyWebAPI client)
+        public FamilyName(GenealogyAPI client)
         {
             if (client == null)
             {
@@ -41,9 +41,9 @@ namespace GenealogyWebAPI.ClientSdk
         }
 
         /// <summary>
-        /// Gets a reference to the GenealogyWebAPI
+        /// Gets a reference to the GenealogyAPI
         /// </summary>
-        public GenealogyWebAPI Client { get; private set; }
+        public GenealogyAPI Client { get; private set; }
 
         /// <summary>
         /// Retrieve profile of person based on name.

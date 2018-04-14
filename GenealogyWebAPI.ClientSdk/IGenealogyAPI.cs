@@ -11,7 +11,7 @@ namespace GenealogyWebAPI.ClientSdk
     /// <summary>
     /// Building Web APIs Workshop Demo Web API
     /// </summary>
-    public partial interface IGenealogyWebAPI : System.IDisposable
+    public partial interface IGenealogyAPI : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.

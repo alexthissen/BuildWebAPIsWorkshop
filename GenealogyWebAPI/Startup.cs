@@ -160,7 +160,7 @@ namespace GenealogyWebAPI
                     settings.DocExpansion = "list";
                     settings.UseJsonEditor = true;
                     settings.GeneratorSettings.Description = "Building Web APIs Workshop Demo Web API";
-                    settings.GeneratorSettings.Title = "Genealogy Web API";
+                    settings.GeneratorSettings.Title = "Genealogy API";
                     settings.GeneratorSettings.Version = "1.0";
                 });
             }
