@@ -1,4 +1,5 @@
 using GenealogyWebAPI.ClientSdk;
+using GenealogyWebAPI.Proxies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,11 @@ namespace GenealogyWebAPI.IntegrationTests
         {
             var builder = new WebHostBuilder()
                 .UseEnvironment("Development")
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureTestServices(services =>
+                {
+                    services.AddTransient<IGenderizeClient, MockGenderizeClient>();
+                });
 
             // Create test stack
             server = new TestServer(builder);
