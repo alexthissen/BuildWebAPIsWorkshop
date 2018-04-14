@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using FeatureToggle.Internal;
 using GenealogyWebAPI.Proxies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,7 +55,7 @@ namespace GenealogyWebAPI
             }
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -71,7 +72,14 @@ namespace GenealogyWebAPI
             ConfigureApiOptions(services);
             ConfigureHttpClients(services);
             ConfigureVersioning(services);
+            ConfigureFeatures(services);
             ConfigureApplicationInsights(services);
+        }
+
+        private void ConfigureFeatures(IServiceCollection services)
+        {
+            var provider = new AppSettingsProvider { Configuration = Configuration };
+            services.AddSingleton(new AdvancedHealthFeature { ToggleValueProvider = provider });
         }
 
         private void ConfigureApplicationInsights(IServiceCollection services)
