@@ -1,6 +1,7 @@
 # TODO: Parametrize URL and name 
 iwr https://localhost:44383/swagger/v1/swagger.json -o BuildWebAPIs.v1.json
-autorest --input-file=BuildWebAPIs.v1.json --csharp --output-folder=GenealogyWebAPI.ClientSdk --namespace=GenealogyWebAPI.ClientSdk
+iwr https://localhost:44383/swagger/v2/swagger.json -o BuildWebAPIs.v2.json
+autorest --input-file=BuildWebAPIs.v2.json --csharp --output-folder=GenealogyWebAPI.ClientSdk --namespace=GenealogyWebAPI.ClientSdk
 
 dotnet new sln -n GenealogyClientSdk --force
 dotnet new classlib -o GenealogyWebAPI.ClientSdk --force
