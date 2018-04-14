@@ -1,4 +1,5 @@
-﻿using GenealogyWebAPI.Proxies;
+﻿using GenealogyWebAPI.Model;
+using GenealogyWebAPI.Proxies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -7,12 +8,13 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace GenealogyWebAPI.Controllers
+namespace GenealogyWebAPI.Controllers.V1
 {
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
     [ApiVersion("0.9", Deprecated = true)]
+    [AdvertiseApiVersions("2.0")]
     public class FamilyNameController : ControllerBase
     {
         private readonly IGenderizeClient genderizeClient;
@@ -33,11 +35,12 @@ namespace GenealogyWebAPI.Controllers
         /// <response code="200">The profile was successfully retrieved.</response>
         /// <response code="400">The request parameters were invalid or a timeout while retrieving profile occurred.</response>
         [HttpGet("{name}")]
-        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(FamilyProfile), 200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<string>> Get(string name)
+        public async Task<ActionResult<FamilyProfile>> Get(string name)
         {
-            string result = null;
+            GenderizeResult result = null;
+            FamilyProfile profile;
 
             try
             {
@@ -45,6 +48,12 @@ namespace GenealogyWebAPI.Controllers
                 string key = genderizeOptions.Value.DeveloperApiKey;
 
                 result = await genderizeClient.GetGenderForName(name, key);
+                Gender gender;
+                profile = new FamilyProfile() {
+                    Name = name,
+                    Gender = Enum.TryParse<Gender>(result.Gender, out gender)
+                        ? gender : Gender.Unknown
+                };
             }
             catch (HttpRequestException)
             {
@@ -59,7 +68,7 @@ namespace GenealogyWebAPI.Controllers
                 // Exception shielding for all other exceptions
                 return StatusCode(StatusCodes.Status500InternalServerError, "Request could not be processed.");
             }
-            return Ok(result);
+            return Ok(profile);
         }
     }
 }

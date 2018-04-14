@@ -1,4 +1,5 @@
-﻿using GenealogyWebAPI.Proxies;
+﻿using GenealogyWebAPI.Model;
+using GenealogyWebAPI.Proxies;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace GenealogyWebAPI.IntegrationTests
 {
     internal class MockGenderizeClient: IGenderizeClient
     {
-        public Task<string> GetGenderForName(string name, string key)
+        public Task<GenderizeResult> GetGenderForName(string name, string key)
         {
-            return Task.FromResult<string>("'alex'");
+            return Task.FromResult<GenderizeResult>(new GenderizeResult() { Name = "alex", Gender = "male" });
         }
     }
 }

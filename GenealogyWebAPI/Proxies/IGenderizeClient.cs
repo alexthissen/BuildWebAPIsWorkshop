@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using GenealogyWebAPI.Model;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace GenealogyWebAPI.Proxies
     public interface IGenderizeClient
     {
         [Get("/")]
-        Task<string> GetGenderForName(string name, [AliasAs("apikey")] string key);
+        Task<GenderizeResult> GetGenderForName(string name, [AliasAs("apikey")] string key);
     }
 }
