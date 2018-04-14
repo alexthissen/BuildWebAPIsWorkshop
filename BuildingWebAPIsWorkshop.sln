@@ -16,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		GenerateClientSdk.ps1 = GenerateClientSdk.ps1
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyWebAPI.ClientSdk", "GenealogyWebAPI.ClientSdk\GenealogyWebAPI.ClientSdk.csproj", "{7DD281B8-E70D-46A5-9488-16A76C3060F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyWebAPI.IntegrationTests", "GenealogyWebAPI.IntegrationTests\GenealogyWebAPI.IntegrationTests.csproj", "{14011625-2270-4BB5-934A-ECFB075DF450}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +38,14 @@ Global
 		{BC72527D-5E98-446F-9522-8E9A33E7D371}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC72527D-5E98-446F-9522-8E9A33E7D371}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC72527D-5E98-446F-9522-8E9A33E7D371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD281B8-E70D-46A5-9488-16A76C3060F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD281B8-E70D-46A5-9488-16A76C3060F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD281B8-E70D-46A5-9488-16A76C3060F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD281B8-E70D-46A5-9488-16A76C3060F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14011625-2270-4BB5-934A-ECFB075DF450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14011625-2270-4BB5-934A-ECFB075DF450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14011625-2270-4BB5-934A-ECFB075DF450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14011625-2270-4BB5-934A-ECFB075DF450}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
