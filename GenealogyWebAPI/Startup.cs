@@ -61,6 +61,7 @@ namespace GenealogyWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
+                .AddXmlSerializerFormatters()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Options for particular external services

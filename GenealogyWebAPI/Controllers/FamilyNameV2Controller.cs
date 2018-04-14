@@ -14,6 +14,7 @@ namespace GenealogyWebAPI.Controllers.V2
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("2.0")]
+    [Produces("application/xml", "application/json")]
     public class FamilyNameController : ControllerBase
     {
         private readonly IGenderizeClient genderizeClient;
