@@ -1,11 +1,10 @@
-# Workshop Building Web APIs using ASP.NET Core 2.1 
+# Workshop Building Web APIs using ASP.NET Core 2.2 
 ## Robust and production ready 
 
-Welcome to the workshop "Building Web APIs using ASP.NET Core 2.1". 
+Welcome to the workshop "Building Web APIs using ASP.NET Core 2.2". 
 
 In this workshop you will learn about creating production-ready Web APIs with
 This workshop is a living workshop: evolving, maturing and improving. 
-Currently ASP.NET Core 2.1 is in Preview 2. This might work, and they might break or change.
 
 The general idea is that you will be able to observe building a ASP.NET Core Web API 
 from "File, New Project" to include more and more features that will help running it reliably in production.
