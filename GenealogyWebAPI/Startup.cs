@@ -169,7 +169,7 @@ namespace GenealogyWebAPI
 
         private void ConfigureOpenApi(IServiceCollection services)
         {
-            services.AddSwagger();
+            services.AddSwaggerDocument();
         }
 
         private void ConfigureHealth(IServiceCollection services)
@@ -231,12 +231,11 @@ namespace GenealogyWebAPI
                     );
                 });
 
-                app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
+                app.UseSwaggerUi3(typeof(Startup).GetTypeInfo().Assembly, settings =>
                 {
                     settings.DocumentPath = "/swagger/v1/swagger.json";
-                    settings.ShowRequestHeaders = true;
+                    settings.EnableTryItOut = true;
                     settings.DocExpansion = "list";
-                    settings.UseJsonEditor = true;
                     settings.PostProcess = document =>
                     {
                         document.BasePath = "/";
