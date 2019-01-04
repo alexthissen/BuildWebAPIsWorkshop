@@ -288,3 +288,6 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/*.pdf
+/*.mp4
+/Alex_Thissen_sessionnotes.txt

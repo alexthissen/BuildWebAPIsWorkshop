@@ -19,14 +19,17 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSwag.AspNetCore;
 using NSwag.SwaggerGeneration.Processors;
+using NSwag.SwaggerGeneration.WebApi;
 using Polly;
 using Polly.Registry;
 using Refit;
 
 namespace GenealogyWebAPI
 {
+    
     public class Startup
     {
+        
         private IPolicyRegistry<string> policyRegistry;
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
@@ -210,14 +213,12 @@ namespace GenealogyWebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
                 // Do not expose Swagger interface in production
-                app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
+                app.UseSwaggerUi3(typeof(Startup).GetTypeInfo().Assembly, settings =>
                 {
-                    settings.SwaggerRoute = "/swagger/v2/swagger.json";
-                    settings.ShowRequestHeaders = true;
+                    settings.DocumentPath = "/swagger/v2/swagger.json";
+                    settings.EnableTryItOut = true;
                     settings.DocExpansion = "list";
-                    settings.UseJsonEditor = true;
                     settings.PostProcess = document =>
                     {
                         document.BasePath = "/";
@@ -226,13 +227,13 @@ namespace GenealogyWebAPI
                     settings.GeneratorSettings.Title = "Genealogy API";
                     settings.GeneratorSettings.Version = "2.0";
                     settings.GeneratorSettings.OperationProcessors.Add(
-                        new ApiVersionProcessor() { IncludedVersions = { "2.0" } }
+                        new ApiVersionProcessor() { IncludedVersions = new[] { "2.0" } }
                     );
                 });
 
                 app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
                 {
-                    settings.SwaggerRoute = "/swagger/v1/swagger.json";
+                    settings.DocumentPath = "/swagger/v1/swagger.json";
                     settings.ShowRequestHeaders = true;
                     settings.DocExpansion = "list";
                     settings.UseJsonEditor = true;
@@ -244,7 +245,7 @@ namespace GenealogyWebAPI
                     settings.GeneratorSettings.Title = "Genealogy API";
                     settings.GeneratorSettings.Version = "1.0";
                     settings.GeneratorSettings.OperationProcessors.Add(
-                        new ApiVersionProcessor() { IncludedVersions = { "1.0" } }
+                        new ApiVersionProcessor() { IncludedVersions = new[] { "1.0" } }
                     );
                 });
             }
